@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
 
 public class SlideManager : MonoBehaviour
 {
     public const string xmlPath = "/Resources/slides.xml";
-    public const string imagesPath = "Assets/Resources/Images/";
+    public const string imagesPath = "Images/";
 
     SlideContainer sc;
 
@@ -30,7 +29,7 @@ public class SlideManager : MonoBehaviour
 
         foreach (SlideData slide in sc.slides)
         {
-            Sprite theSprite = AssetDatabase.LoadAssetAtPath(imagesPath + slide.imagePath, typeof(Sprite)) as Sprite;
+            Sprite theSprite = Resources.Load<Sprite>(imagesPath + slide.slideName);
 
             GameObject newGameObject = new GameObject();
             Slide newSlide = newGameObject.AddComponent<Slide>();

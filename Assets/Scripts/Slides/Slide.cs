@@ -18,7 +18,8 @@ public class Slide : MonoBehaviour
     // Use this for initialization
     public void Init(string _name, string _syllables, Sprite _image)
     {
-        name = _name;
+        name = _name.ToLower();
+        _syllables = _syllables.ToLower();
         slideImage = _image;
 
         slideSpriteRenderer = GetComponent<SpriteRenderer>();
