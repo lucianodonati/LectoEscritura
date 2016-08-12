@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<SlideCollection>
+  <Slides>
+    <Slide name="Cama">
+      <Syllables>ca,ma</Syllables>
+      <ImagePath>Cama.jpg</ImagePath>
+    </Slide>
+    <Slide name="Cocina">
+      <Syllables>co,ci,na</Syllables>
+      <ImagePath>Cocina.jpg</ImagePath>
+    </Slide>
+  </Slides>
+</SlideCollection>
