@@ -7,12 +7,32 @@ public class Slide : MonoBehaviour
     List<string> syllables;
 
     SpriteRenderer slideSpriteRenderer;
+    public readonly float slideSize = 0.6f;
 
     readonly char[] separators = { ' ', ',', '.', ';', '-', '_' };
 
     void Awake()
     {
-        slideSpriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+        slideSpriteRenderer = GetComponent<SpriteRenderer>();
+        if (!slideSpriteRenderer)
+            slideSpriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+    }
+
+    void Start()
+    {
+        SetSlideSizeAndLocation();
+    }
+
+    void SetSlideSizeAndLocation()
+    {
+        Bounds bounds = slideSpriteRenderer.sprite.bounds;
+        float factor = 6 / bounds.size.y;
+        transform.localScale = Vector3.one * factor;
+
+        float x = (Screen.width / 2) - (slideSpriteRenderer.bounds.size.x / 2);
+        float y = (Screen.height / 2) - (slideSpriteRenderer.bounds.size.y / 2);
+
+        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x, y, 10));
     }
 
     // Use this for initialization

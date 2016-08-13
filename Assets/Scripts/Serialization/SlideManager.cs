@@ -12,7 +12,7 @@ public class SlideManager : MonoBehaviour
 
     void Start()
     {
-        ReadXML();
+        //ReadXML();
     }
 
     // Use this for initialization
