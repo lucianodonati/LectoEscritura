@@ -21,7 +21,15 @@ public class SlideManager : MonoBehaviour
 
     public void ReadXML()
     {
-        sc = SlideContainer.Load(Application.dataPath + xmlPath);
+        string url = Application.dataPath + xmlPath;
+
+        if (Application.isWebPlayer)
+        {
+            WWW request = new WWW(url);
+            while (!request.isDone) ;
+            url = request.text;
+        }
+        sc = SlideContainer.Load(url);
     }
 
     void WriteXML()
