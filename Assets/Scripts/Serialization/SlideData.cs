@@ -14,4 +14,7 @@ public class SlideData {
     [XmlElement("Syllables")]
     public string syllables;
 
+    [XmlElement("AlreadyFilled")]
+    public string alreadyFilled;
+
 }

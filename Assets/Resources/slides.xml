@@ -2,11 +2,26 @@
 
 <SlideCollection>
   <Slides>
+
     <Slide name="Cama">
       <Syllables>ca,ma</Syllables>
+      <AlreadyFilled>1,0</AlreadyFilled>
     </Slide>
+
     <Slide name="Cocina">
       <Syllables>co,ci,na</Syllables>
+      <AlreadyFilled>1,0,1</AlreadyFilled>
     </Slide>
+
+    <Slide name="Maleta">
+      <Syllables>ma,le,ta</Syllables>
+      <AlreadyFilled>1,0,0</AlreadyFilled>
+    </Slide>
+
+    <Slide name="Bicicleta">
+      <Syllables>bi,ci,cle,ta</Syllables>
+      <AlreadyFilled>0,1,1,0</AlreadyFilled>
+    </Slide>
+
   </Slides>
 </SlideCollection>
