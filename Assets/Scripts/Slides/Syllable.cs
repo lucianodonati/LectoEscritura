@@ -38,7 +38,7 @@ public class Syllable : MonoBehaviour
         }
     }
 
-    public void Init(float _size, int _order, bool _alreadyFilled, string _correctSyllable, InputField _inputField, SoundManager _soundManager)
+    public void Init(bool _alreadyFilled, string _correctSyllable, InputField _inputField, SoundManager _soundManager)
     {
         soundManager = _soundManager;
 

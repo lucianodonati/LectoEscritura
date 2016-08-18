@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class PrefabsManager : MonoBehaviour
 {
     // Parents
-    public Transform canvasParent;
+    public Transform imagesPanel;
+    public Transform inputFieldsPanel;
     public Transform slidesParent;
 
     // Prefabs
@@ -25,12 +26,9 @@ public class PrefabsManager : MonoBehaviour
     public Image InstantiateImage(Sprite theSprite)
     {
         Image newImage = Instantiate<Image>(imagePrefab);
-        newImage.transform.SetParent(canvasParent, false);
+        newImage.transform.SetParent(imagesPanel, false);
 
         newImage.sprite = theSprite;
-
-        float imageSize = Screen.height * .6f;
-        newImage.rectTransform.anchoredPosition.
 
         return newImage;
     }
@@ -38,7 +36,7 @@ public class PrefabsManager : MonoBehaviour
     {
         InputField newInputField = Instantiate<InputField>(textPrefab);
         newInputField.name = _name;
-        newInputField.transform.SetParent(canvasParent, false);
+        newInputField.transform.SetParent(inputFieldsPanel, false);
 
         return newInputField;
     }

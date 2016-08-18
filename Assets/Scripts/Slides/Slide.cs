@@ -37,12 +37,6 @@ public class Slide : MonoBehaviour
         finishedWriting = false;
         syllables = new List<Syllable>();
 
-        SetImageSizeAndLocation();
-    }
-
-    void SetImageSizeAndLocation()
-    {
-        //slideImage.rectTransform.sizeDelta = Vector2.one * 450;
     }
 
     public void Init(string _name, string _syllables, string _alreadyFilled, Image _image, SoundManager _soundManager)
@@ -53,6 +47,7 @@ public class Slide : MonoBehaviour
         _syllables = _syllables.ToUpper();
 
         slideImage = _image;
+        slideImage.name = name + " Image";
 
         // Parse the strings and create lists for the syllables and the filled ones
         syllablesStrings = new List<string>(_syllables.Split(separators));
@@ -62,12 +57,11 @@ public class Slide : MonoBehaviour
 
         syllablesFilled = StringListToBooleanList(filledSyllablesStrings);
 
-        float syllableScale = 1 / syllablesStrings.Count;
         for (int syllableIndex = 0; syllableIndex < syllablesStrings.Count; syllableIndex++)
         {
             InputField inputField = prefabsManager.InstantiateInputField(syllablesStrings[syllableIndex].ToUpper());
             Syllable currentSyll = prefabsManager.InstantiateSyllable(transform);
-            currentSyll.Init(syllableScale, syllableIndex, syllablesFilled[syllableIndex], syllablesStrings[syllableIndex].ToUpper(), inputField, soundManager);
+            currentSyll.Init(syllablesFilled[syllableIndex], syllablesStrings[syllableIndex].ToUpper(), inputField, soundManager);
             syllables.Add(currentSyll);
         }
 
