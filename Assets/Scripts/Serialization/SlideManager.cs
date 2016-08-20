@@ -21,19 +21,6 @@ public class SlideManager : MonoBehaviour
 
     public void ReadXML()
     {
-        //string url = Application.dataPath + xmlPath;
-
-        //Debug.Log("URL: " + url);
-
-        //if (Application.isWebPlayer)
-        //{
-        //    Debug.Log("isWebPlayer");
-        //    WWW request = new WWW(url);
-        //    while (!request.isDone) ;
-        //    url = request.text;
-        //    Debug.Log("Request Finished");
-        //    Debug.Log("Data: " + url);
-        //}
         TextAsset textAsset = (TextAsset)Resources.Load("slides");
 
         sc = SlideContainer.LoadFromText(textAsset.text);
