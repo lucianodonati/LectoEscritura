@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class SlideManager : MonoBehaviour
 {
-    public const string xmlPath = "/Resources/slides.xml";
     public const string imagesPath = "Images/";
 
     public bool randomOrder = true;
@@ -22,25 +21,28 @@ public class SlideManager : MonoBehaviour
 
     public void ReadXML()
     {
-        string url = Application.dataPath + xmlPath;
+        //string url = Application.dataPath + xmlPath;
 
-        Debug.Log("URL: " + url);
+        //Debug.Log("URL: " + url);
 
-        if (Application.isWebPlayer)
-        {
-            Debug.Log("isWebPlayer");
-            WWW request = new WWW(url);
-            while (!request.isDone) ;
-            url = request.text;
-            Debug.Log("Request Finished");
-            Debug.Log("Data: " + url);
-        }
-        sc = SlideContainer.Load(url);
+        //if (Application.isWebPlayer)
+        //{
+        //    Debug.Log("isWebPlayer");
+        //    WWW request = new WWW(url);
+        //    while (!request.isDone) ;
+        //    url = request.text;
+        //    Debug.Log("Request Finished");
+        //    Debug.Log("Data: " + url);
+        //}
+        TextAsset textAsset = (TextAsset)Resources.Load("slides");
+
+        sc = SlideContainer.LoadFromText(textAsset.text);
     }
 
     void WriteXML()
     {
-        sc.Save(Application.persistentDataPath + xmlPath);
+        TextAsset textAsset = (TextAsset)Resources.Load("slides");
+        sc.Save(textAsset.text);
     }
 
     public Slide getNextSlide()

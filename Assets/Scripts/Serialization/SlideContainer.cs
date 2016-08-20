@@ -18,16 +18,6 @@ public class SlideContainer
         }
     }
 
-    public static SlideContainer Load(string path)
-    {
-        var serializer = new XmlSerializer(typeof(SlideContainer));
-        using (var stream = new FileStream(path, FileMode.Open))
-        {
-            return serializer.Deserialize(stream) as SlideContainer;
-        }
-    }
-
-    //Loads the xml directly from the given string. Useful in combination with www.text.
     public static SlideContainer LoadFromText(string text)
     {
         var serializer = new XmlSerializer(typeof(SlideContainer));
