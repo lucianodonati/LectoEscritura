@@ -13,6 +13,7 @@ public class SlideManager : MonoBehaviour
 
     public PrefabsManager prefabsManager;
     public SoundManager soundManager;
+    public Transform completedSlidesTransform;
 
     void Start()
     {
@@ -23,11 +24,16 @@ public class SlideManager : MonoBehaviour
     {
         string url = Application.dataPath + xmlPath;
 
+        Debug.Log("URL: " + url);
+
         if (Application.isWebPlayer)
         {
+            Debug.Log("isWebPlayer");
             WWW request = new WWW(url);
             while (!request.isDone) ;
             url = request.text;
+            Debug.Log("Request Finished");
+            Debug.Log("Data: " + url);
         }
         sc = SlideContainer.Load(url);
     }
@@ -39,19 +45,26 @@ public class SlideManager : MonoBehaviour
 
     public Slide getNextSlide()
     {
-        int slideIndex = 0;
+        if (sc.slides.Count > 0)
+        {
 
-        if (!randomOrder)
-            slideIndex = Random.Range(0, sc.slides.Count);
+            int slideIndex = 0;
 
-        SlideData data = sc.slides[slideIndex];
-        Sprite theSprite = Resources.Load<Sprite>(imagesPath + data.slideName);
+            if (!randomOrder)
+                slideIndex = Random.Range(0, sc.slides.Count);
 
-        Image theImage = prefabsManager.InstantiateImage(theSprite);
+            SlideData data = sc.slides[slideIndex];
+            Sprite theSprite = Resources.Load<Sprite>(imagesPath + data.slideName);
 
-        Slide newSlide = prefabsManager.InstantiateSlide();
-        newSlide.Init(data.slideName, data.syllables, data.alreadyFilled, theImage, soundManager);
+            Image theImage = prefabsManager.InstantiateImage(theSprite);
 
-        return newSlide;
+            Slide newSlide = prefabsManager.InstantiateSlide();
+            newSlide.Init(data.slideName, data.syllables, data.alreadyFilled, theImage, soundManager, completedSlidesTransform);
+
+            sc.slides.Remove(data);
+
+            return newSlide;
+        }
+        return null;
     }
 }

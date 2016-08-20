@@ -16,16 +16,18 @@ public class Slide : MonoBehaviour
     List<Syllable> syllables;
     Syllable currentSyllable;
 
-    bool finishedWriting;
-
     public readonly float slideSize = 0.6f;
 
     readonly char[] separators = { ' ', ',', '.', ';', '-', '_' };
 
     SoundManager soundManager;
+    Transform completedSlidesTransform;
+
+    public float timeSpentOnThis;
 
     void Start()
     {
+        timeSpentOnThis = 0;
     }
 
     void Awake()
@@ -34,14 +36,15 @@ public class Slide : MonoBehaviour
 
         syllablesFilledIndex = 0;
 
-        finishedWriting = false;
         syllables = new List<Syllable>();
 
     }
 
-    public void Init(string _name, string _syllables, string _alreadyFilled, Image _image, SoundManager _soundManager)
+    public void Init(string _name, string _syllables, string _alreadyFilled, Image _image, SoundManager _soundManager,Transform _completedSlidesTransform)
     {
         soundManager = _soundManager;
+
+        completedSlidesTransform = _completedSlidesTransform;
 
         name = _name;
         _syllables = _syllables.ToUpper();
@@ -57,12 +60,20 @@ public class Slide : MonoBehaviour
 
         syllablesFilled = StringListToBooleanList(filledSyllablesStrings);
 
+        bool firstOne = true;
         for (int syllableIndex = 0; syllableIndex < syllablesStrings.Count; syllableIndex++)
         {
             InputField inputField = prefabsManager.InstantiateInputField(syllablesStrings[syllableIndex].ToUpper());
             Syllable currentSyll = prefabsManager.InstantiateSyllable(transform);
-            currentSyll.Init(syllablesFilled[syllableIndex], syllablesStrings[syllableIndex].ToUpper(), inputField, soundManager);
+            currentSyll.Init(syllablesFilled[syllableIndex], syllablesStrings[syllableIndex].ToUpper(), inputField, soundManager,transform);
             syllables.Add(currentSyll);
+
+            // Focus on the first syllable to complete
+            if (!syllablesFilled[syllableIndex] && firstOne)
+            {
+                FocusOnInputField(inputField);
+                firstOne = false;
+            }
         }
 
 
@@ -112,38 +123,42 @@ public class Slide : MonoBehaviour
     public void FocusNextSyllable()
     {
         Syllable nextSyll = getNextSyllableToComplete();
+        FocusOnInputField(nextSyll.text);
+    }
 
-        EventSystem.current.SetSelectedGameObject(nextSyll.text.gameObject, null);
-        nextSyll.text.OnPointerClick(new PointerEventData(EventSystem.current));
+    void FocusOnInputField(InputField objectToFocusOn)
+    {
+        EventSystem.current.SetSelectedGameObject(objectToFocusOn.gameObject, null);
+        objectToFocusOn.OnPointerClick(new PointerEventData(EventSystem.current));
     }
 
     void Update()
     {
         // Finished writing the syllable
-        if (currentSyllable.completed)
+        if (IsCorrect())
         {
-            // Typed it right
-            if (currentSyllable.correct)
-            {
-                currentSyllable.CorrectBlockSyllable();
-            }
-            // Mistakes were made =(
-            else
-            {
 
-            }
         }
+        else
+            timeSpentOnThis += Time.deltaTime;
+    }
+
+    public void DestroyVisuals()
+    {
+        foreach (Syllable syllable in syllables)
+            syllable.DestroyVisuals();
+        Destroy(slideImage.gameObject);
+        name = "[C]" + name;
+        transform.SetParent(completedSlidesTransform);
+        gameObject.SetActive(false);
     }
 
     public bool IsCorrect()
     {
-        if (!finishedWriting)
-            return false;
-
         bool correct = true;
 
         for (int syllableIndex = 0; syllableIndex < syllablesStrings.Count && correct; syllableIndex++)
-            correct = syllables[syllableIndex].correct;
+            correct = syllables[syllableIndex].correct && syllables[syllableIndex].completed;
 
         return correct;
     }

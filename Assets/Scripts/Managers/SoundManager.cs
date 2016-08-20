@@ -21,4 +21,12 @@ public class SoundManager : MonoBehaviour
     {
 
     }
+
+    public void playRepeat(string _clipName)
+    {
+        if (!source.isPlaying)
+        {
+
+        }
+    }
 }

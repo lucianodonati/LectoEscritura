@@ -6,41 +6,47 @@ public class Syllable : MonoBehaviour
 {
     enum ColorState
     {
-        NotSelected, Selected, MouseOver, Wrong, Correct
+        NotSelected, Selected, Wrong, Correct
     }
 
     ColorState oldState, newState;
-    static readonly Color[] colors = { Color.blue, Color.cyan, Color.grey, Color.red, Color.green };
-    static readonly float duration = 1;
+    static readonly Color[] colors = { Color.white, Color.cyan, Color.red, Color.green };
+    static readonly float duration = .8f;
     float lerpTime = 0;
 
     SoundManager soundManager;
+    Transform completedSlidesTransform;
 
     public InputField text;
 
     public bool completed, correct;
     string correctText, typedText;
 
-    void Start()
+    void Awake()
     {
         oldState = newState = ColorState.NotSelected;
-
         completed = false;
     }
 
     void Update()
     {
-        if (text)
+        if (text && !oldState.Equals(newState))
         {
             text.image.color = Color.Lerp(colors[(int)oldState], colors[(int)newState], lerpTime);
             if (lerpTime < 1)
                 lerpTime += Time.deltaTime / duration;
+            else if (correct && completed)
+            {
+                text.interactable = false;
+            }
         }
     }
 
-    public void Init(bool _alreadyFilled, string _correctSyllable, InputField _inputField, SoundManager _soundManager)
+    public void Init(bool _alreadyFilled, string _correctSyllable, InputField _inputField, SoundManager _soundManager, Transform _completedSlidesTransform)
     {
         soundManager = _soundManager;
+
+        completedSlidesTransform = _completedSlidesTransform;
 
         text = _inputField;
         text.image.color = colors[(int)newState];
@@ -50,8 +56,9 @@ public class Syllable : MonoBehaviour
         // If the syllable is already filled set it's text
         if (_alreadyFilled)
         {
+            ChangeColorState(ColorState.Correct);
             text.text = correctText;
-            CorrectBlockSyllable();
+            text.readOnly = correct = completed = true;
         }
         else
         {
@@ -62,8 +69,8 @@ public class Syllable : MonoBehaviour
 
     public void CorrectBlockSyllable()
     {
-        text.readOnly = correct = completed = true;
         ChangeColorState(ColorState.Correct);
+        text.readOnly = correct = completed = true;
 
         soundManager.playOneShot("CorrectSyllable");
     }
@@ -74,44 +81,43 @@ public class Syllable : MonoBehaviour
             return false;
 
         if (typedText == correctText)
+        {
             correct = true;
-        return true;
+            CorrectBlockSyllable();
+            return true;
+        }
+        return false;
     }
 
     void ChangeColorState(ColorState _newState)
     {
-        if (!completed)
-        {
-            oldState = newState;
-            newState = _newState;
-        }
+        oldState = newState;
+        newState = _newState;
     }
 
     public void SyllableValueChanged(string _currentValue)
     {
+        soundManager.playRepeat("Typing");
         ChangeColorState(ColorState.Selected);
-
         typedText = text.text = _currentValue.ToUpper();
-
-        CheckIsCorrect();
     }
 
     public void SyllableFinishedWriting(string _currentValue)
     {
-        if (!CheckIsCorrect())
+        if (!CheckIsCorrect() && text.text.Length > 0)
+        {
             ChangeColorState(ColorState.Wrong);
-
-        // Gets checked every frame by the owner slide
-        completed = true;
+            soundManager.playOneShot("InCorrectSyllable");
+        }
+        else
+            lerpTime = 0;
     }
 
-    void OnMouseOver()
+    public void DestroyVisuals()
     {
-        ChangeColorState(ColorState.MouseOver);
-    }
-
-    void OnMouseExit()
-    {
-        ChangeColorState(ColorState.NotSelected);
+        Destroy(text.gameObject);
+        name = "[C]" + name;
+        //transform.SetParent(completedSlidesTransform);
+        gameObject.SetActive(false);
     }
 }

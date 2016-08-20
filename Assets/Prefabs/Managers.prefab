@@ -281,6 +281,7 @@ MonoBehaviour:
   randomOrder: 1
   prefabsManager: {fileID: 114000010982155986}
   soundManager: {fileID: 114000011041409036}
+  completedSlidesTransform: {fileID: 0}
 --- !u!114 &114000013217619826
 MonoBehaviour:
   m_ObjectHideFlags: 1

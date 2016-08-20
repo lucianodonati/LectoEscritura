@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject particleEffects;
+
+    List<ParticleSystem> particles;
+
     public SlideManager slideManager;
     Slide currentSlide;
     public int currentSlideFinishedCount;
 
     public enum GameState
     {
-        NONE, INIT, MENU, NEXT_SLIDE, PLAYING, RIGHT, WRONG, NEXT_LEVEL,
+        NONE, INIT, MENU, NEXT_SLIDE, PLAYING, RIGHT, NEXT_LEVEL,
     }
 
     public GameState currentState;
@@ -18,12 +22,13 @@ public class GameManager : MonoBehaviour
     /* Slides */
     int slidesToNextLevel = 5;
 
-    float nextLevelTimer = 0;
+    float nextLevelTimer = 0, checkSlideEvery = .01f, slideTimer;
 
     // Use this for initialization
     void Start()
     {
         currentState = GameState.INIT;
+        particles = new List<ParticleSystem>(particleEffects.GetComponentsInChildren<ParticleSystem>());
     }
 
     // Update is called once per frame
@@ -41,6 +46,7 @@ public class GameManager : MonoBehaviour
                 currentState = GameState.NEXT_SLIDE;
                 break;
             case GameState.NEXT_SLIDE:
+                print("Next_slide");
                 NextSlide();
                 break;
             case GameState.PLAYING:
@@ -49,15 +55,11 @@ public class GameManager : MonoBehaviour
             case GameState.RIGHT:
                 Right();
                 break;
-            case GameState.WRONG:
-                Wrong();
-                break;
             case GameState.NEXT_LEVEL:
-
+                print("NEXT_LEVEL");
                 break;
-            default:
-                throw new UnityException("Non-handled state triggered. [GameManager State Machine]");
         }
+
     }
 
     void Init()
@@ -68,15 +70,29 @@ public class GameManager : MonoBehaviour
 
     void NextSlide()
     {
+        if (currentSlide)
+            currentSlide.DestroyVisuals();
+
         currentSlide = slideManager.getNextSlide();
-        currentState = GameState.PLAYING;
+
+        if (currentSlide)
+            currentState = GameState.PLAYING;
+        else
+            currentState = GameState.MENU;
         nextLevelTimer = 3;
     }
 
     void Playing()
     {
-        if (currentSlide.IsCorrect())
+        slideTimer -= Time.deltaTime;
+
+        if (slideTimer < 0 && currentSlide.IsCorrect())
+        {
+            slideTimer = checkSlideEvery;
             currentState = GameState.RIGHT;
+            foreach (ParticleSystem ps in particles)
+                ps.Emit(300);
+        }
         else
         {
 
@@ -88,11 +104,9 @@ public class GameManager : MonoBehaviour
         nextLevelTimer -= Time.deltaTime;
         slidesToNextLevel--;
 
+
+
         if (nextLevelTimer <= 0)
             currentState = GameState.NEXT_SLIDE;
-    }
-
-    void Wrong()
-    {
     }
 }
