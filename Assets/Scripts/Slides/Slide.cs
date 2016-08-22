@@ -14,7 +14,7 @@ public class Slide : MonoBehaviour
 
     public List<string> syllablesStrings;
     List<Syllable> syllables;
-    Syllable currentSyllable;
+    //Syllable currentSyllable;
 
     public readonly float slideSize = 0.6f;
 
@@ -78,7 +78,7 @@ public class Slide : MonoBehaviour
         }
 
 
-        currentSyllable = getNextSyllableToComplete();
+        //currentSyllable = getNextSyllableToComplete();
     }
 
     private List<bool> StringListToBooleanList(List<string> filledSyllablesStrings)

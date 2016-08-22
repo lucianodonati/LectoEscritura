@@ -51,7 +51,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010171215474}
-  - 82: {fileID: 82000013784260408}
   - 114: {fileID: 114000011041409036}
   m_Layer: 0
   m_Name: SoundManager
@@ -160,80 +159,6 @@ Transform:
   - {fileID: 4000013582088146}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!82 &82000013784260408
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011336306346}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!114 &114000010982155986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,6 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9b212ac1ac641499245144c8cadf01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muted: 1
+  musicClips: []
+  audioSources: []
 --- !u!114 &114000012610356744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -279,10 +207,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomOrder: 1
+  result: {fileID: 0}
   prefabsManager: {fileID: 114000010982155986}
   soundManager: {fileID: 114000011041409036}
   completedSlidesTransform: {fileID: 0}
-  result: {fileID: 0}
 --- !u!114 &114000013217619826
 MonoBehaviour:
   m_ObjectHideFlags: 1

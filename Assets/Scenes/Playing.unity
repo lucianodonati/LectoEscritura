@@ -2252,13 +2252,8 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
         type: 2}
-      propertyPath: musicClips.Array.size
+      propertyPath: FXClips.Array.size
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.size
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000014287438586, guid: 20e3f79069a054747bbb55e0951b48b3, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2292,16 +2287,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114000013217619826, guid: 20e3f79069a054747bbb55e0951b48b3,
+    - target: {fileID: 114000012610356744, guid: 20e3f79069a054747bbb55e0951b48b3,
         type: 2}
-      propertyPath: particleEffects
-      value: 
-      objectReference: {fileID: 93490250}
-    - target: {fileID: 114000013217619826, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: resultText
+      propertyPath: result
       value: 
       objectReference: {fileID: 1309966805}
+    - target: {fileID: 114000012610356744, guid: 20e3f79069a054747bbb55e0951b48b3,
+        type: 2}
+      propertyPath: completedSlidesTransform
+      value: 
+      objectReference: {fileID: 2013871308}
     - target: {fileID: 114000010982155986, guid: 20e3f79069a054747bbb55e0951b48b3,
         type: 2}
       propertyPath: imagesPanel
@@ -2317,166 +2312,16 @@ Prefab:
       propertyPath: slidesParent
       value: 
       objectReference: {fileID: 237970978}
-    - target: {fileID: 114000012610356744, guid: 20e3f79069a054747bbb55e0951b48b3,
+    - target: {fileID: 114000013217619826, guid: 20e3f79069a054747bbb55e0951b48b3,
         type: 2}
-      propertyPath: completedSlidesTransform
+      propertyPath: particleEffects
       value: 
-      objectReference: {fileID: 2013871308}
-    - target: {fileID: 114000012610356744, guid: 20e3f79069a054747bbb55e0951b48b3,
+      objectReference: {fileID: 93490250}
+    - target: {fileID: 114000013217619826, guid: 20e3f79069a054747bbb55e0951b48b3,
         type: 2}
-      propertyPath: result
+      propertyPath: resultText
       value: 
       objectReference: {fileID: 1309966805}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: musicSource
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: fxSource
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 6374de20932d82048a0bb366853ac571, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 2d2c7330e755fb045b457e43af882a3f, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: d6894270a1632934389c0d2d60edd0db, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 09bd8bb1d3371b643abb76288f58f87b, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 33f479f17c290454a96d5215f1c58eb0, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 1204593239812d948bd523711af4f92c, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[6]
-      value: 
-      objectReference: {fileID: 8300000, guid: dd51e026cf5062d4ba08d575252da61a, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[7]
-      value: 
-      objectReference: {fileID: 8300000, guid: 5711c2d6ffaffa24caddbb62638071b4, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[8]
-      value: 
-      objectReference: {fileID: 8300000, guid: ae31a7870ea8cf64e981ea587ba99179, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[9]
-      value: 
-      objectReference: {fileID: 8300000, guid: 7ee14a988df307b4b97c2d3f04792b83, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[10]
-      value: 
-      objectReference: {fileID: 8300000, guid: 39cc1c7941f279b428d78c89142f2984, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[11]
-      value: 
-      objectReference: {fileID: 8300000, guid: e615fe89d7795a143976de7339fd85da, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[12]
-      value: 
-      objectReference: {fileID: 8300000, guid: a41c76a94e570ff48a0ecef422981076, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[13]
-      value: 
-      objectReference: {fileID: 8300000, guid: 0d7d8aa9ae6f5d44da7790bdf31485c2, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[14]
-      value: 
-      objectReference: {fileID: 8300000, guid: 429378f9eca5a1d4f95a82da56e19caa, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[15]
-      value: 
-      objectReference: {fileID: 8300000, guid: 192f529a709fdf14a809c3533b85ebd9, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[16]
-      value: 
-      objectReference: {fileID: 8300000, guid: 0d82fb0b95b8c3545877c48dbc62a2f1, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[17]
-      value: 
-      objectReference: {fileID: 8300000, guid: 6646b35c73f38f44ca9a5a72c2b18c9e, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[18]
-      value: 
-      objectReference: {fileID: 8300000, guid: 956f14bc073031e4baf56c52d5bd3e6b, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[19]
-      value: 
-      objectReference: {fileID: 8300000, guid: 762c20ecd528e914eb86efdfa2ff289e, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[20]
-      value: 
-      objectReference: {fileID: 8300000, guid: a1b956fc4c9fe73439a9078d5c65a201, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[21]
-      value: 
-      objectReference: {fileID: 8300000, guid: 3ca47bbd8d1326141ace97513242c0d8, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[22]
-      value: 
-      objectReference: {fileID: 8300000, guid: 374e553e67d11a144a6ad25ec98b6314, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[23]
-      value: 
-      objectReference: {fileID: 8300000, guid: c323fb3ec40af5049b9972d7e370e295, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[24]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8832a65eaa47ba6459f85bff14afb0f6, type: 3}
-    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: alphabetKeys.Array.data[25]
-      value: 
-      objectReference: {fileID: 8300000, guid: 844dcddf350589249ab5278783085d6f, type: 3}
-    - target: {fileID: 82000013784260408, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4499fc0b17428a54ca80c86094be08c6, type: 3}
-    - target: {fileID: 82000013784260408, guid: 20e3f79069a054747bbb55e0951b48b3,
-        type: 2}
-      propertyPath: m_Volume
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
         type: 2}
       propertyPath: muted
@@ -2484,11 +2329,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
         type: 2}
-      propertyPath: musicClips.Array.data[0]
+      propertyPath: FXClips.Array.data[0].theClip
       value: 
-      objectReference: {fileID: 8300000, guid: 4499fc0b17428a54ca80c86094be08c6, type: 3}
-    m_RemovedComponents:
-    - {fileID: 82000013784260408, guid: 20e3f79069a054747bbb55e0951b48b3, type: 2}
+      objectReference: {fileID: 8300000, guid: bed5905bff392ec46929e9e4c842081c, type: 3}
+    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
+        type: 2}
+      propertyPath: FXClips.Array.data[0].theClipName
+      value: Correct
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011041409036, guid: 20e3f79069a054747bbb55e0951b48b3,
+        type: 2}
+      propertyPath: FXClips.Array.data[0].volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20e3f79069a054747bbb55e0951b48b3, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2013871307

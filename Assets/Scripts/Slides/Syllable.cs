@@ -104,9 +104,9 @@ public class Syllable : MonoBehaviour
 
     void Done()
     {
+        text.interactable = false;
         text.readOnly = completed = true;
         text.image.color = Color.green;
-        //parentSlide.FocusNextSyllable();
     }
 
     bool CheckIsCorrect()
@@ -144,6 +144,7 @@ public class Syllable : MonoBehaviour
         lerpTo = Color.green;
         transitionTo = SyllableState.Done;
         currentState = SyllableState.Transition;
+        parentSlide.FocusNextSyllable();
     }
 
     void Wrong()

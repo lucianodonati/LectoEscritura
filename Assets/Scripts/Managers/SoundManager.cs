@@ -4,20 +4,27 @@ using System.Collections.Generic;
 public class SoundManager : MonoBehaviour
 {
     public bool muted = true;
-    float masterVolume = 1;
+    float masterVolume = .5f;
     public AudioClip[] musicClips;
     public List<AudioSource> audioSources;
     public Dictionary<string, AudioClip> alphabetClips;
 
-    [SerializeField]
     public List<StringClipPair> FXClips;
     //public Dictionary<string, AudioClip> FXClips;
+
+    [System.Serializable]
+    public struct StringClipPair
+    {
+        public string theClipName;
+        public AudioClip theClip;
+    }
+
 
     public enum AudioSourcesTypes
     {
         MusicSource, FXSource, TypeWriterSource
     }
-    float[] volumes = { .5f, .5f, .5f };
+    float[] volumes = { .5f, .5f, .2f };
 
     readonly string[] alphabet = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
         "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
@@ -42,6 +49,14 @@ public class SoundManager : MonoBehaviour
 
         SetMuted();
         ToggleMusic();
+    }
+
+    AudioClip getClipFromString(string _string)
+    {
+        foreach (StringClipPair pair in FXClips)
+            if (pair.theClipName == _string)
+                return pair.theClip;
+        return null;
     }
 
     public void ToggleMusic()
@@ -75,6 +90,7 @@ public class SoundManager : MonoBehaviour
     public void UpdateVolume(AudioSourcesTypes _whichOne, float _newVolume)
     {
         volumes[(int)_whichOne] = masterVolume * Mathf.Clamp(_newVolume, 0, 1);
+        audioSources[(int)_whichOne].volume = volumes[(int)_whichOne];
     }
 
     // Update is called once per frame
@@ -87,8 +103,8 @@ public class SoundManager : MonoBehaviour
 
     public void playOneShot(string _clipName)
     {
-        AudioClip theClip = FXClips[_clipName];
+        AudioClip theClip = getClipFromString(_clipName);
         if (theClip)
-            audioSources[(int)AudioSourcesTypes.FXSource].PlayOneShot(theClip);
+            audioSources[(int)AudioSourcesTypes.FXSource].PlayOneShot(theClip, volumes[(int)AudioSourcesTypes.FXSource]);
     }
 }
