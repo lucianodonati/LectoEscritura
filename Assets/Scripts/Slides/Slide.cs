@@ -40,7 +40,7 @@ public class Slide : MonoBehaviour
 
     }
 
-    public void Init(string _name, string _syllables, string _alreadyFilled, Image _image, SoundManager _soundManager,Transform _completedSlidesTransform)
+    public void Init(string _name, string _syllables, string _alreadyFilled, Image _image, SoundManager _soundManager, Transform _completedSlidesTransform, Text _result)
     {
         soundManager = _soundManager;
 
@@ -65,13 +65,14 @@ public class Slide : MonoBehaviour
         {
             InputField inputField = prefabsManager.InstantiateInputField(syllablesStrings[syllableIndex].ToUpper());
             Syllable currentSyll = prefabsManager.InstantiateSyllable(transform);
-            currentSyll.Init(syllablesFilled[syllableIndex], syllablesStrings[syllableIndex].ToUpper(), inputField, soundManager,transform);
+            currentSyll.Init(syllablesFilled[syllableIndex], syllablesStrings[syllableIndex].ToUpper(), inputField, soundManager);
             syllables.Add(currentSyll);
 
             // Focus on the first syllable to complete
             if (!syllablesFilled[syllableIndex] && firstOne)
             {
-                FocusOnInputField(inputField);
+                if (!Application.isMobilePlatform)
+                    FocusOnInputField(inputField);
                 firstOne = false;
             }
         }

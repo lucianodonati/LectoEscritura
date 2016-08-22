@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -6,6 +7,8 @@ public class GameManager : MonoBehaviour
     public GameObject particleEffects;
 
     List<ParticleSystem> particles;
+
+    public Text resultText;
 
     public SlideManager slideManager;
     Slide currentSlide;
@@ -22,7 +25,7 @@ public class GameManager : MonoBehaviour
     /* Slides */
     int slidesToNextLevel = 5;
 
-    float nextLevelTimer = 0, checkSlideEvery = .01f, slideTimer;
+    float nextLevelTimer = 0, checkSlideEvery = .01f, slideTimer, incorrectTimer;
 
     // Use this for initialization
     void Start()
@@ -46,7 +49,6 @@ public class GameManager : MonoBehaviour
                 currentState = GameState.NEXT_SLIDE;
                 break;
             case GameState.NEXT_SLIDE:
-                print("Next_slide");
                 NextSlide();
                 break;
             case GameState.PLAYING:
@@ -56,7 +58,6 @@ public class GameManager : MonoBehaviour
                 Right();
                 break;
             case GameState.NEXT_LEVEL:
-                print("NEXT_LEVEL");
                 break;
         }
 
@@ -85,26 +86,43 @@ public class GameManager : MonoBehaviour
     void Playing()
     {
         slideTimer -= Time.deltaTime;
+        incorrectTimer -= Time.deltaTime;
 
         if (slideTimer < 0 && currentSlide.IsCorrect())
         {
             slideTimer = checkSlideEvery;
             currentState = GameState.RIGHT;
-            foreach (ParticleSystem ps in particles)
-                ps.Emit(300);
+            CorrectSlideFeedback();
         }
-        else
+        else if(incorrectTimer<0)
         {
-
+            resultText.gameObject.SetActive(false);
         }
+    }
+
+    void CorrectSlideFeedback()
+    {
+        foreach (ParticleSystem ps in particles)
+            ps.Emit(300);
+        resultText.gameObject.SetActive(true);
+        resultText.text = "Correcto !";
+        resultText.color = Color.green;
+    }
+
+    void IncorrectSlideFeedback()
+    {
+        incorrectTimer = 1;
+        foreach (ParticleSystem ps in particles)
+            ps.Emit(300);
+        resultText.gameObject.SetActive(true);
+        resultText.text = "Intentalo de nuevo...";
+        resultText.color = Color.red;
     }
 
     void Right()
     {
         nextLevelTimer -= Time.deltaTime;
         slidesToNextLevel--;
-
-
 
         if (nextLevelTimer <= 0)
             currentState = GameState.NEXT_SLIDE;

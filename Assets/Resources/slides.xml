@@ -3,6 +3,21 @@
 <SlideCollection>
   <Slides>
 
+    <Slide name="Perro">
+      <Syllables>pe,rro</Syllables>
+      <AlreadyFilled>1,0</AlreadyFilled>
+    </Slide>
+
+    <Slide name="Manzana">
+      <Syllables>man,za,na</Syllables>
+      <AlreadyFilled>1,0,0</AlreadyFilled>
+    </Slide>
+
+    <Slide name="Globo">
+      <Syllables>glo,bo</Syllables>
+      <AlreadyFilled>1,0</AlreadyFilled>
+    </Slide>
+
     <Slide name="Cama">
       <Syllables>ca,ma</Syllables>
       <AlreadyFilled>1,0</AlreadyFilled>
@@ -10,7 +25,7 @@
 
     <Slide name="Cocina">
       <Syllables>co,ci,na</Syllables>
-      <AlreadyFilled>1,0,1</AlreadyFilled>
+      <AlreadyFilled>0,1,0</AlreadyFilled>
     </Slide>
 
     <Slide name="Maleta">

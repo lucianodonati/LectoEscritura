@@ -4,75 +4,109 @@ using System.Collections.Generic;
 
 public class Syllable : MonoBehaviour
 {
-    enum ColorState
+    enum SyllableState
     {
-        NotSelected, Selected, Wrong, Correct
+        None, Init, Typing, Wrong, Shake, Correct, Transition, Done
     }
 
-    ColorState oldState, newState;
-    static readonly Color[] colors = { Color.white, Color.cyan, Color.red, Color.green };
-    static readonly float duration = .8f;
-    float lerpTime = 0;
+    SyllableState currentState, transitionTo;
+    static readonly float colorLerpDuration = .8f;
+    float colorLerpTimer = 0;
 
+    Slide parentSlide;
     SoundManager soundManager;
-    Transform completedSlidesTransform;
 
     public InputField text;
+
+    Color lerpTo;
 
     public bool completed, correct;
     string correctText, typedText;
 
+    bool initialized = false;
+
+    bool shakeToggle = true;
+    float shakeSpeed = 300;
+
     void Awake()
     {
-        oldState = newState = ColorState.NotSelected;
-        completed = false;
+        currentState = SyllableState.Init;
+    }
+
+    void Start()
+    {
+        parentSlide = GetComponentInParent<Slide>();
     }
 
     void Update()
     {
-        if (text && !oldState.Equals(newState))
+        if (initialized)
         {
-            text.image.color = Color.Lerp(colors[(int)oldState], colors[(int)newState], lerpTime);
-            if (lerpTime < 1)
-                lerpTime += Time.deltaTime / duration;
-            else if (correct && completed)
+            switch (currentState)
             {
-                text.interactable = false;
+                case SyllableState.Init:
+                    text.transform.localEulerAngles = Vector3.zero;
+                    text.interactable = true;
+                    completed = correct = false;
+                    colorLerpTimer = 0;
+                    text.image.color = Color.white;
+                    text.text = "";
+                    currentState = SyllableState.None;
+                    break;
+                case SyllableState.Typing:
+                    Typing();
+                    break;
+                case SyllableState.Wrong:
+                    Wrong();
+                    break;
+                case SyllableState.Shake:
+                    Shaking();
+                    break;
+                case SyllableState.Correct:
+                    Correct();
+                    break;
+                case SyllableState.Transition:
+                    Transition();
+                    break;
+                case SyllableState.Done:
+                    Done();
+                    break;
             }
+
+
+
         }
     }
 
-    public void Init(bool _alreadyFilled, string _correctSyllable, InputField _inputField, SoundManager _soundManager, Transform _completedSlidesTransform)
+    public void Init(bool _alreadyFilled, string _correctSyllable, InputField _inputField, SoundManager _soundManager)
     {
         soundManager = _soundManager;
 
-        completedSlidesTransform = _completedSlidesTransform;
-
         text = _inputField;
-        text.image.color = colors[(int)newState];
+        text.image.color = lerpTo;
 
         // Set the name of the gameobject and save it.
         name = correctText = _correctSyllable;
         // If the syllable is already filled set it's text
         if (_alreadyFilled)
         {
-            ChangeColorState(ColorState.Correct);
+            currentState = SyllableState.Done;
             text.text = correctText;
-            text.readOnly = correct = completed = true;
+            correct = true;
         }
         else
         {
             text.onValueChanged.AddListener(SyllableValueChanged);
             text.onEndEdit.AddListener(SyllableFinishedWriting);
         }
+        initialized = true;
     }
 
-    public void CorrectBlockSyllable()
+    void Done()
     {
-        ChangeColorState(ColorState.Correct);
-        text.readOnly = correct = completed = true;
-
-        soundManager.playOneShot("CorrectSyllable");
+        text.readOnly = completed = true;
+        text.image.color = Color.green;
+        //parentSlide.FocusNextSyllable();
     }
 
     bool CheckIsCorrect()
@@ -83,34 +117,85 @@ public class Syllable : MonoBehaviour
         if (typedText == correctText)
         {
             correct = true;
-            CorrectBlockSyllable();
             return true;
         }
         return false;
     }
 
-    void ChangeColorState(ColorState _newState)
+    void Typing()
     {
-        oldState = newState;
-        newState = _newState;
+    }
+
+    void Transition()
+    {
+        text.interactable = false;
+
+        text.image.color = Color.Lerp(text.image.color, lerpTo, colorLerpTimer);
+        if (colorLerpTimer < 1)
+            colorLerpTimer += Time.deltaTime / colorLerpDuration;
+        else
+            currentState = transitionTo;
+
+    }
+
+    void Correct()
+    {
+        soundManager.playOneShot("Correct");
+        lerpTo = Color.green;
+        transitionTo = SyllableState.Done;
+        currentState = SyllableState.Transition;
+    }
+
+    void Wrong()
+    {
+        lerpTo = Color.red;
+        soundManager.playOneShot("Incorrect");
+        transitionTo = SyllableState.Init;
+        currentState = SyllableState.Shake;
+    }
+
+    void Shaking()
+    {
+        Transition();
+
+        int toggleInt = 1;
+
+        if (!shakeToggle)
+            toggleInt = -1;
+
+        text.transform.Rotate(Vector3.forward, shakeSpeed * toggleInt * Time.deltaTime);
+
+        if (text.transform.eulerAngles.z < 180)
+        {
+            if (text.transform.eulerAngles.z > 5)
+                shakeToggle = false;
+        }
+        else if (text.transform.eulerAngles.z - 360 < -5)
+            shakeToggle = true;
+
     }
 
     public void SyllableValueChanged(string _currentValue)
     {
-        soundManager.playRepeat("Typing");
-        ChangeColorState(ColorState.Selected);
         typedText = text.text = _currentValue.ToUpper();
+        currentState = SyllableState.Typing;
     }
 
     public void SyllableFinishedWriting(string _currentValue)
     {
-        if (!CheckIsCorrect() && text.text.Length > 0)
+        if (text.text.Length > 0)
         {
-            ChangeColorState(ColorState.Wrong);
-            soundManager.playOneShot("InCorrectSyllable");
+            if (CheckIsCorrect())
+            {
+                currentState = SyllableState.Correct;
+            }
+            else
+            {
+                currentState = SyllableState.Wrong;
+            }
         }
         else
-            lerpTime = 0;
+            colorLerpTimer = 0;
     }
 
     public void DestroyVisuals()

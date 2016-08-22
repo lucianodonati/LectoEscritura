@@ -282,6 +282,7 @@ MonoBehaviour:
   prefabsManager: {fileID: 114000010982155986}
   soundManager: {fileID: 114000011041409036}
   completedSlidesTransform: {fileID: 0}
+  result: {fileID: 0}
 --- !u!114 &114000013217619826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,6 +294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868a9d6ffdc84da4c92d8c1e0315e553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleEffects: {fileID: 0}
+  resultText: {fileID: 0}
   slideManager: {fileID: 114000012610356744}
   currentSlideFinishedCount: 0
   currentState: 0
