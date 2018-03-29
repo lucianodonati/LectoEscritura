@@ -42,11 +42,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 400
+  m_MinHeight: -1
   m_PreferredWidth: -1
   m_PreferredHeight: -1
-  m_FlexibleWidth: 0.8
-  m_FlexibleHeight: 0.8
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
 --- !u!114 &114000011577399590
 MonoBehaviour:
   m_ObjectHideFlags: 1

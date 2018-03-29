@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject particleEffects;
-
     List<ParticleSystem> particles;
 
-    public Text resultText;
+    Text resultText;
 
     public SlideManager slideManager;
     Slide currentSlide;
@@ -16,22 +15,22 @@ public class GameManager : MonoBehaviour
 
     public enum GameState
     {
-        NONE, INIT, MENU, NEXT_SLIDE, PLAYING, RIGHT, NEXT_LEVEL,
+        NONE, INIT, MENU, NEXT_SLIDE, PLAYING, RIGHT
     }
 
     public GameState currentState;
 
-
     /* Slides */
-    int slidesToNextLevel = 5;
+    int slidesPerLevel = 5;
+    int slidesToNextLevel;
 
     float nextLevelTimer = 0, checkSlideEvery = .01f, slideTimer, incorrectTimer;
 
     // Use this for initialization
     void Start()
     {
+        DontDestroyOnLoad(this);
         currentState = GameState.INIT;
-        particles = new List<ParticleSystem>(particleEffects.GetComponentsInChildren<ParticleSystem>());
     }
 
     // Update is called once per frame
@@ -45,8 +44,12 @@ public class GameManager : MonoBehaviour
                 Init();
                 break;
             case GameState.MENU:
-                // TEMPORARY
-                currentState = GameState.NEXT_SLIDE;
+                if (SceneManager.GetActiveScene().name == "Playing")
+                {
+                    FindReferences();
+                    slideManager.ReadXML();
+                    currentState = GameState.NEXT_SLIDE;
+                }
                 break;
             case GameState.NEXT_SLIDE:
                 NextSlide();
@@ -57,15 +60,24 @@ public class GameManager : MonoBehaviour
             case GameState.RIGHT:
                 Right();
                 break;
-            case GameState.NEXT_LEVEL:
-                break;
         }
 
     }
 
+    void FindReferences()
+    {
+        slideManager = GameObject.FindObjectOfType<SlideManager>();
+        particles = new List<ParticleSystem>(
+            GameObject.Find("ParticleEffects").GetComponentsInChildren<ParticleSystem>()
+            );
+        resultText = GameObject.Find("Result").GetComponent<Text>();
+        resultText.gameObject.SetActive(false);
+
+        GameObject.Find("Salir").GetComponent<Button>().onClick.AddListener(ExitGame);
+    }
+
     void Init()
     {
-        slideManager.ReadXML();
         currentState = GameState.MENU;
     }
 
@@ -94,7 +106,7 @@ public class GameManager : MonoBehaviour
             currentState = GameState.RIGHT;
             CorrectSlideFeedback();
         }
-        else if(incorrectTimer<0)
+        else if (incorrectTimer < 0)
         {
             resultText.gameObject.SetActive(false);
         }
@@ -127,4 +139,24 @@ public class GameManager : MonoBehaviour
         if (nextLevelTimer <= 0)
             currentState = GameState.NEXT_SLIDE;
     }
+
+    public void StartPlaying()
+    {
+        slidesToNextLevel = slidesPerLevel;
+        SceneManager.LoadScene("Playing");
+
+
+    }
+
+    public void OpenOptions()
+    {
+
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+
 }

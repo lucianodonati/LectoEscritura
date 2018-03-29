@@ -11,7 +11,9 @@ public class Syllable : MonoBehaviour
 
     SyllableState currentState, transitionTo;
     static readonly float colorLerpDuration = .8f;
-    float colorLerpTimer = 0;
+    float rightColorTimer = 0;
+    float vowelColorTimer = 0;
+
 
     Slide parentSlide;
     SoundManager soundManager;
@@ -48,7 +50,7 @@ public class Syllable : MonoBehaviour
                     text.transform.localEulerAngles = Vector3.zero;
                     text.interactable = true;
                     completed = correct = false;
-                    colorLerpTimer = 0;
+                    rightColorTimer = 0;
                     text.image.color = Color.white;
                     text.text = "";
                     currentState = SyllableState.None;
@@ -83,10 +85,13 @@ public class Syllable : MonoBehaviour
         soundManager = _soundManager;
 
         text = _inputField;
-        text.image.color = lerpTo;
 
         // Set the name of the gameobject and save it.
         name = correctText = _correctSyllable;
+
+        lerpTo = SetVowelColor.getVowelColor(correctText[correctText.Length - 1]);
+
+
         // If the syllable is already filled set it's text
         if (_alreadyFilled)
         {
@@ -106,7 +111,8 @@ public class Syllable : MonoBehaviour
     {
         text.interactable = false;
         text.readOnly = completed = true;
-        text.image.color = Color.green;
+        text.image.color = SetVowelColor.getVowelColor(correctText[correctText.Length - 1]);
+        text.textComponent.color = Color.black;
     }
 
     bool CheckIsCorrect()
@@ -124,15 +130,32 @@ public class Syllable : MonoBehaviour
 
     void Typing()
     {
+        if (vowelColorTimer < 1)
+        {
+            vowelColorTimer += Time.deltaTime / 1000;
+
+            text.textComponent.color = Color.Lerp(text.textComponent.color, lerpTo, vowelColorTimer);
+
+            if (vowelColorTimer * 100 > 1)
+            {
+                vowelColorTimer = 1;
+                text.textComponent.color = lerpTo;
+            }
+        }
+        else
+        {
+            text.textComponent.color = Color.Lerp(text.textComponent.color, Color.black, Time.deltaTime / 10);
+            text.image.color = Color.Lerp(text.image.color, lerpTo, Time.deltaTime / 10);
+        }
     }
 
     void Transition()
     {
         text.interactable = false;
 
-        text.image.color = Color.Lerp(text.image.color, lerpTo, colorLerpTimer);
-        if (colorLerpTimer < 1)
-            colorLerpTimer += Time.deltaTime / colorLerpDuration;
+        text.image.color = Color.Lerp(text.image.color, lerpTo, rightColorTimer);
+        if (rightColorTimer < 1)
+            rightColorTimer += Time.deltaTime / colorLerpDuration;
         else
             currentState = transitionTo;
 
@@ -141,6 +164,7 @@ public class Syllable : MonoBehaviour
     void Correct()
     {
         soundManager.playOneShot("Correct");
+        text.textComponent.color = Color.black;
         lerpTo = Color.green;
         transitionTo = SyllableState.Done;
         currentState = SyllableState.Transition;
@@ -196,7 +220,7 @@ public class Syllable : MonoBehaviour
             }
         }
         else
-            colorLerpTimer = 0;
+            rightColorTimer = 0;
     }
 
     public void DestroyVisuals()
