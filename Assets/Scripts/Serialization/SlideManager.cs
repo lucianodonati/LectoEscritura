@@ -38,10 +38,9 @@ public class SlideManager : MonoBehaviour
     {
         if (sc.slides.Count > 0)
         {
-
             int slideIndex = 0;
 
-            if (!randomOrder)
+            if (randomOrder)
                 slideIndex = Random.Range(0, sc.slides.Count);
 
             SlideData data = sc.slides[slideIndex];
@@ -50,7 +49,7 @@ public class SlideManager : MonoBehaviour
             Image theImage = prefabsManager.InstantiateImage(theSprite);
 
             Slide newSlide = prefabsManager.InstantiateSlide();
-            newSlide.Init(data.slideName, data.syllables, data.alreadyFilled, theImage, soundManager, completedSlidesTransform, result);
+            newSlide.Init(data.slideName, data.syllables, theImage, soundManager, completedSlidesTransform, result);
 
             sc.slides.Remove(data);
 

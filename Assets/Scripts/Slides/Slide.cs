@@ -40,32 +40,33 @@ public class Slide : MonoBehaviour
 
     }
 
-    public void Init(string _name, string _syllables, string _alreadyFilled, Image _image, SoundManager _soundManager, Transform _completedSlidesTransform, Text _result)
+    public void Init(string _name, string _syllables, Image _image, SoundManager _soundManager, Transform _completedSlidesTransform, Text _result)
     {
+        bool toUpper = Random.value > .5f;
+
         soundManager = _soundManager;
 
         completedSlidesTransform = _completedSlidesTransform;
 
         name = _name;
-        _syllables = _syllables.ToUpper();
 
         slideImage = _image;
         slideImage.name = name + " Image";
 
         // Parse the strings and create lists for the syllables and the filled ones
         syllablesStrings = new List<string>(_syllables.Split(separators));
-        List<string> filledSyllablesStrings = new List<string>(_alreadyFilled.Split(separators));
 
         // Input data .xml mistakes should be handled here
 
-        syllablesFilled = StringListToBooleanList(filledSyllablesStrings);
+        syllablesFilled = RandomizeFilledOnes(syllablesStrings.Count);
 
         bool firstOne = true;
         for (int syllableIndex = 0; syllableIndex < syllablesStrings.Count; syllableIndex++)
         {
-            InputField inputField = prefabsManager.InstantiateInputField(syllablesStrings[syllableIndex].ToUpper());
+
+            InputField inputField = prefabsManager.InstantiateInputField(syllablesStrings[syllableIndex]);
             Syllable currentSyll = prefabsManager.InstantiateSyllable(transform);
-            currentSyll.Init(syllablesFilled[syllableIndex], syllablesStrings[syllableIndex].ToUpper(), inputField, soundManager);
+            currentSyll.Init(syllablesFilled[syllableIndex], syllablesStrings[syllableIndex], toUpper, inputField, soundManager);
             syllables.Add(currentSyll);
 
             // Focus on the first syllable to complete
@@ -77,23 +78,53 @@ public class Slide : MonoBehaviour
             }
         }
 
-
         //currentSyllable = getNextSyllableToComplete();
     }
 
-    private List<bool> StringListToBooleanList(List<string> filledSyllablesStrings)
+    private List<bool> RandomizeFilledOnes(int syllableCount)
     {
         List<bool> booleanList = new List<bool>();
 
-        foreach (string theString in filledSyllablesStrings)
+        int filledOnesCount = 1;
+        List<int> indexesUsed = new List<int>();
+
+        if (syllableCount > 2)
         {
-            if (theString.Contains("1") || theString.Contains("+") || theString.Contains("si") || theString.Contains("yes") || theString.Contains("true"))
+            filledOnesCount = (int)(syllableCount * .5f);
+            // Randomize rounding
+            if (Random.value > .5f)
+                filledOnesCount++;
+        }
+
+        for (int i = 0; i < filledOnesCount; i++)
+        {
+            int randomIndex = -1;
+            do
+            {
+                randomIndex = Random.Range(0, syllableCount);
+            } while (IsIndexPicked(randomIndex, indexesUsed));
+            indexesUsed.Add(randomIndex);
+        }
+
+        for (int i = 0; i < syllableCount; i++)
+        {
+            if (IsIndexPicked(i, indexesUsed))
                 booleanList.Add(true);
             else
                 booleanList.Add(false);
         }
 
         return booleanList;
+    }
+
+    bool IsIndexPicked(int index, List<int> pickedOnes)
+    {
+        for (int i = 0; i < pickedOnes.Count; i++)
+        {
+            if (pickedOnes[i] == index)
+                return true;
+        }
+        return false;
     }
 
     Syllable getNextSyllableToComplete()

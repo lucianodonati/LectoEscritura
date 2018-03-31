@@ -18,14 +18,14 @@ public class PrefabsManager : MonoBehaviour
 
     public Slide InstantiateSlide()
     {
-        Slide newSlide = Instantiate<Slide>(slidePrefab);
+        Slide newSlide = Instantiate(slidePrefab);
         newSlide.transform.SetParent(slidesParent);
 
         return newSlide;
     }
     public Image InstantiateImage(Sprite theSprite)
     {
-        Image newImage = Instantiate<Image>(imagePrefab);
+        Image newImage = Instantiate(imagePrefab);
         newImage.transform.SetParent(imagesPanel, false);
 
         newImage.sprite = theSprite;
@@ -34,7 +34,7 @@ public class PrefabsManager : MonoBehaviour
     }
     public InputField InstantiateInputField(string _name)
     {
-        InputField newInputField = Instantiate<InputField>(textPrefab);
+        InputField newInputField = Instantiate(textPrefab);
         newInputField.name = _name;
         newInputField.transform.SetParent(inputFieldsPanel, false);
 
@@ -42,7 +42,7 @@ public class PrefabsManager : MonoBehaviour
     }
     public Syllable InstantiateSyllable(Transform slideParent)
     {
-        Syllable newSyllable = Instantiate<Syllable>(syllablePrefab);
+        Syllable newSyllable = Instantiate(syllablePrefab);
         newSyllable.transform.SetParent(slideParent);
 
         return newSyllable;

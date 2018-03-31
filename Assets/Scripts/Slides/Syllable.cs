@@ -10,7 +10,7 @@ public class Syllable : MonoBehaviour
     }
 
     SyllableState currentState, transitionTo;
-    static readonly float colorLerpDuration = .8f;
+    static readonly float colorLerpDuration = .5f;
     float colorLerpTimer = 0;
 
     Slide parentSlide;
@@ -27,6 +27,8 @@ public class Syllable : MonoBehaviour
 
     bool shakeToggle = true;
     float shakeSpeed = 300;
+
+    bool toUpper = false;
 
     void Awake()
     {
@@ -72,21 +74,21 @@ public class Syllable : MonoBehaviour
                     Done();
                     break;
             }
-
-
-
         }
     }
 
-    public void Init(bool _alreadyFilled, string _correctSyllable, InputField _inputField, SoundManager _soundManager)
+    public void Init(bool _alreadyFilled, string _correctSyllable, bool _toUpper, InputField _inputField, SoundManager _soundManager)
     {
+        toUpper = _toUpper;
+
         soundManager = _soundManager;
 
         text = _inputField;
         text.image.color = lerpTo;
 
         // Set the name of the gameobject and save it.
-        name = correctText = _correctSyllable;
+        name = correctText = toUpper ? _correctSyllable.ToUpper() : _correctSyllable.ToLower();
+
         // If the syllable is already filled set it's text
         if (_alreadyFilled)
         {
@@ -178,7 +180,7 @@ public class Syllable : MonoBehaviour
 
     public void SyllableValueChanged(string _currentValue)
     {
-        typedText = text.text = _currentValue.ToUpper();
+        typedText = text.text = toUpper ? _currentValue.ToUpper() : _currentValue.ToLower();
         currentState = SyllableState.Typing;
     }
 

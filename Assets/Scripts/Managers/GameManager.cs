@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     List<ParticleSystem> particles;
 
+    public GameObject resultTextParent;
     public Text resultText;
 
     public SlideManager slideManager;
@@ -94,9 +95,9 @@ public class GameManager : MonoBehaviour
             currentState = GameState.RIGHT;
             CorrectSlideFeedback();
         }
-        else if(incorrectTimer<0)
+        else if (incorrectTimer < 0)
         {
-            resultText.gameObject.SetActive(false);
+            resultTextParent.gameObject.SetActive(false);
         }
     }
 
@@ -104,7 +105,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (ParticleSystem ps in particles)
             ps.Emit(300);
-        resultText.gameObject.SetActive(true);
+        resultTextParent.gameObject.SetActive(true);
         resultText.text = "Correcto !";
         resultText.color = Color.green;
     }
@@ -114,7 +115,7 @@ public class GameManager : MonoBehaviour
         incorrectTimer = 1;
         foreach (ParticleSystem ps in particles)
             ps.Emit(300);
-        resultText.gameObject.SetActive(true);
+        resultTextParent.gameObject.SetActive(true);
         resultText.text = "Intentalo de nuevo...";
         resultText.color = Color.red;
     }
