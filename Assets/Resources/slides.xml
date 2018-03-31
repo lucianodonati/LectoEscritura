@@ -31,5 +31,33 @@
       <Syllables>bi,ci,cle,ta</Syllables>
     </Slide>
 
+    <Slide name="Camion">
+      <Syllables>ca,mión</Syllables>
+    </Slide>	
+
+    <Slide name="Moto">
+      <Syllables>mo,to</Syllables>
+    </Slide>
+
+    <Slide name="Computadora">
+      <Syllables>com,pu,ta,do,ra</Syllables>
+    </Slide>
+
+    <Slide name="Microfono">
+      <Syllables>mi,cró,fo,no</Syllables>
+    </Slide>
+
+    <Slide name="Parlantes">
+      <Syllables>par,lan,tes</Syllables>
+    </Slide>
+
+    <Slide name="Auriculares">
+      <Syllables>au,ri,cu,la,res</Syllables>
+    </Slide>
+
+    <Slide name="Bandera">
+      <Syllables>ban,de,ra</Syllables>
+    </Slide>
+
   </Slides>
 </SlideCollection>
