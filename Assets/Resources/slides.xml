@@ -59,5 +59,207 @@
       <Syllables>ban,de,ra</Syllables>
     </Slide>
 
+    <Slide name="Tren">
+      <Syllables>tren</Syllables>
+    </Slide>
+
+    <Slide name="Avion">
+      <Syllables>a,vión</Syllables>
+    </Slide>
+
+    <Slide name="Jirafa">
+      <Syllables>ji,ra,fa</Syllables>
+    </Slide>
+
+    <Slide name="Cebra">
+      <Syllables>ce,bra</Syllables>
+    </Slide>
+
+    <Slide name="Mono">
+      <Syllables>mo,no</Syllables>
+    </Slide>
+
+    <Slide name="Hipopotamo">
+      <Syllables>hi,po,pó,ta,mo</Syllables>
+    </Slide>
+
+    <Slide name="Gato">
+      <Syllables>ga,to</Syllables>
+    </Slide>
+
+    <Slide name="Pajaro">
+      <Syllables>pá,ja,ro</Syllables>
+    </Slide>
+
+    <Slide name="Tortuga">
+      <Syllables>tor,tu,ga</Syllables>
+    </Slide>
+
+    <Slide name="Delfin">
+      <Syllables>del,fín</Syllables>
+    </Slide>
+
+    <Slide name="Tiburon">
+      <Syllables>ti,bu,rón</Syllables>
+    </Slide>
+
+    <Slide name="Leon">
+      <Syllables>león</Syllables>
+    </Slide>
+
+    <Slide name="Guitarra">
+      <Syllables>gui,ta,rra</Syllables>
+    </Slide>
+
+    <Slide name="Flauta">
+      <Syllables>flau,ta</Syllables>
+    </Slide>
+
+    <Slide name="Bateria">
+      <Syllables>ba,te,rí,a</Syllables>
+    </Slide>
+
+    <Slide name="Piano">
+      <Syllables>pi,a,no</Syllables>
+    </Slide>
+
+    <Slide name="Tambor">
+      <Syllables>tam,bor</Syllables>
+    </Slide>
+
+    <Slide name="Pelotas">
+      <Syllables>pe,lo,tas</Syllables>
+    </Slide>
+
+    <Slide name="Silbato">
+      <Syllables>sil,ba,to</Syllables>
+    </Slide>
+
+    <Slide name="Medias">
+      <Syllables>me,dias</Syllables>
+    </Slide>
+
+    <Slide name="Zapato">
+      <Syllables>za,pa,to</Syllables>
+    </Slide>
+
+    <Slide name="Falda">
+      <Syllables>fal,da</Syllables>
+    </Slide>
+
+    <Slide name="Vestido">
+      <Syllables>ves,ti,do</Syllables>
+    </Slide>
+
+    <Slide name="Remera">
+      <Syllables>re,me,ra</Syllables>
+    </Slide>
+
+    <Slide name="Pantalon">
+      <Syllables>pan,ta,lón</Syllables>
+    </Slide>
+
+    <Slide name="Campera">
+      <Syllables>cam,pe,ra</Syllables>
+    </Slide>
+
+    <Slide name="Almohada">
+      <Syllables>al,mo,ha,da</Syllables>
+    </Slide>
+
+    <Slide name="Toalla">
+      <Syllables>to,a,lla</Syllables>
+    </Slide>
+
+    <Slide name="Jabon">
+      <Syllables>ja,bón</Syllables>
+    </Slide>
+
+    <Slide name="Esponja">
+      <Syllables>es,pon,ja</Syllables>
+    </Slide>
+
+    <Slide name="Escoba">
+      <Syllables>es,co,ba</Syllables>
+    </Slide>
+
+    <Slide name="Pasto">
+      <Syllables>pas,to</Syllables>
+    </Slide>
+
+    <Slide name="Caballo">
+      <Syllables>ca,ba,llo</Syllables>
+    </Slide>
+
+    <Slide name="Pileta">
+      <Syllables>pi,le,ta</Syllables>
+    </Slide>
+
+    <Slide name="Playa">
+      <Syllables>pla,ya</Syllables>
+    </Slide>
+
+    <Slide name="Billete">
+      <Syllables>bi,lle,te</Syllables>
+    </Slide>
+
+    <Slide name="Cine">
+      <Syllables>ci,ne</Syllables>
+    </Slide>
+
+    <Slide name="Teatro">
+      <Syllables>te,a,tro</Syllables>
+    </Slide>
+
+    <Slide name="Pato">
+      <Syllables>pa,to</Syllables>
+    </Slide>
+
+    <Slide name="Cisne">
+      <Syllables>cis,ne</Syllables>
+    </Slide>
+
+    <Slide name="Sapo">
+      <Syllables>sa,po</Syllables>
+    </Slide>
+
+    <Slide name="Auto">
+      <Syllables>au,to</Syllables>
+    </Slide>
+
+    <Slide name="Empanada">
+      <Syllables>em,pa,na,da</Syllables>
+    </Slide>
+
+    <Slide name="Milanesa">
+      <Syllables>mi,la,ne,sa</Syllables>
+    </Slide>
+
+    <Slide name="Fideos">
+      <Syllables>fi,de,os</Syllables>
+    </Slide>
+
+    <Slide name="Medialuna">
+      <Syllables>me,dia,lu,na</Syllables>
+    </Slide>
+
+    <Slide name="Helado">
+      <Syllables>he,la,do</Syllables>
+    </Slide>
+
+    <Slide name="Micro">
+      <Syllables>mi,cro</Syllables>
+    </Slide>
+
+    <Slide name="Hamburguesa">
+      <Syllables>ham,bur,gue,sas</Syllables>
+    </Slide>
+
+    <Slide name="Gaseosa">
+      <Syllables>ga,se,o,sa</Syllables>
+    </Slide>
+
+
+
   </Slides>
 </SlideCollection>
