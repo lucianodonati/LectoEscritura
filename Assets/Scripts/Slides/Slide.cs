@@ -40,7 +40,7 @@ public class Slide : MonoBehaviour
 
     }
 
-    public void Init(string _name, string _syllables, Image _image, SoundManager _soundManager, Transform _completedSlidesTransform, Text _result)
+    public void Init(string _name, string _syllables, Image _image, SoundManager _soundManager, Transform _completedSlidesTransform)
     {
         bool toUpper = Random.value > .5f;
 
@@ -85,10 +85,14 @@ public class Slide : MonoBehaviour
     {
         List<bool> booleanList = new List<bool>();
 
-        int filledOnesCount = 1;
+        int filledOnesCount = 0;
         List<int> indexesUsed = new List<int>();
 
-        if (syllableCount > 2)
+        if (syllableCount == 2)
+        {
+            filledOnesCount = 1;
+        }
+        else if (syllableCount > 2)
         {
             filledOnesCount = (int)(syllableCount * .5f);
             // Randomize rounding
@@ -138,7 +142,8 @@ public class Slide : MonoBehaviour
                 nextSyllable = syllables[toCompleteIndex];
             }
         }
-        nextSyllable.enabled = true;
+        if (null != nextSyllable)
+            nextSyllable.enabled = true;
         return nextSyllable;
     }
 
@@ -155,7 +160,8 @@ public class Slide : MonoBehaviour
     public void FocusNextSyllable()
     {
         Syllable nextSyll = getNextSyllableToComplete();
-        FocusOnInputField(nextSyll.text);
+        if (null != nextSyll)
+            FocusOnInputField(nextSyll.text);
     }
 
     void FocusOnInputField(InputField objectToFocusOn)

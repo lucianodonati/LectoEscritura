@@ -3,6 +3,10 @@
 <SlideCollection>
   <Slides>
 
+    <Slide name="Tren">
+      <Syllables>tren</Syllables>
+    </Slide>
+
     <Slide name="Perro">
       <Syllables>pe,rro</Syllables>
     </Slide>
@@ -57,10 +61,6 @@
 
     <Slide name="Bandera">
       <Syllables>ban,de,ra</Syllables>
-    </Slide>
-
-    <Slide name="Tren">
-      <Syllables>tren</Syllables>
     </Slide>
 
     <Slide name="Avion">
@@ -200,7 +200,7 @@
     </Slide>
 
     <Slide name="Billete">
-      <Syllables>bi,lle,te</Syllables>
+      <Syllables>bi,lle,tes</Syllables>
     </Slide>
 
     <Slide name="Cine">
@@ -228,7 +228,7 @@
     </Slide>
 
     <Slide name="Empanada">
-      <Syllables>em,pa,na,da</Syllables>
+      <Syllables>em,pa,na,das</Syllables>
     </Slide>
 
     <Slide name="Milanesa">
@@ -252,7 +252,7 @@
     </Slide>
 
     <Slide name="Hamburguesa">
-      <Syllables>ham,bur,gue,sas</Syllables>
+      <Syllables>ham,bur,gue,sa</Syllables>
     </Slide>
 
     <Slide name="Gaseosa">

@@ -10,8 +10,6 @@ public class SlideManager : MonoBehaviour
 
     SlideContainer sc;
 
-    public Text result;
-
     public PrefabsManager prefabsManager;
     public SoundManager soundManager;
     public Transform completedSlidesTransform;
@@ -49,9 +47,9 @@ public class SlideManager : MonoBehaviour
             Image theImage = prefabsManager.InstantiateImage(theSprite);
 
             Slide newSlide = prefabsManager.InstantiateSlide();
-            newSlide.Init(data.slideName, data.syllables, theImage, soundManager, completedSlidesTransform, result);
+            newSlide.Init(data.slideName, data.syllables, theImage, soundManager, completedSlidesTransform);
 
-            sc.slides.Remove(data);
+            //sc.slides.Remove(data);
 
             return newSlide;
         }
