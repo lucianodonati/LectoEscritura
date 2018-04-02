@@ -9,6 +9,10 @@ public class Syllable : MonoBehaviour
         None, Init, Typing, Wrong, Shake, Correct, Transition, Done
     }
 
+    readonly bool accentedMarksCount = false;
+    static readonly char[] vocals = { 'a', 'e', 'i', 'o', 'u' };
+    static readonly char[] accentedMarks = { 'á', 'é', 'í', 'ó', 'ú' };
+
     SyllableState currentState, transitionTo;
     static readonly float colorLerpDuration = .5f;
     float colorLerpTimer = 0;
@@ -120,6 +124,26 @@ public class Syllable : MonoBehaviour
         {
             correct = true;
             return true;
+        }
+        else if (!accentedMarksCount)
+        {
+            char[] withoutAccentMark = typedText.ToLower().ToCharArray();
+            for (int i = 0; i < withoutAccentMark.Length; i++)
+            {
+                for (int j = 0; j < accentedMarks.Length; j++)
+                {
+                    if (withoutAccentMark[i] == vocals[j])
+                    {
+                        withoutAccentMark[i] = accentedMarks[j];
+                        break;
+                    }
+                }
+            }
+            if (correctText.ToLower() == new string(withoutAccentMark))
+            {
+                correct = true;
+                return true;
+            }
         }
         return false;
     }

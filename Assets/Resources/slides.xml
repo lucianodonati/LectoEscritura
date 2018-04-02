@@ -3,6 +3,18 @@
 <SlideCollection>
   <Slides>
 
+    <Slide name="Pajaro">
+      <Syllables>pá,ja,ro</Syllables>
+    </Slide>
+
+    <Slide name="Camion">
+      <Syllables>ca,mión</Syllables>
+    </Slide>
+
+    <Slide name="Avion">
+      <Syllables>a,vión</Syllables>
+    </Slide>
+
     <Slide name="Tren">
       <Syllables>tren</Syllables>
     </Slide>
@@ -35,10 +47,6 @@
       <Syllables>bi,ci,cle,ta</Syllables>
     </Slide>
 
-    <Slide name="Camion">
-      <Syllables>ca,mión</Syllables>
-    </Slide>	
-
     <Slide name="Moto">
       <Syllables>mo,to</Syllables>
     </Slide>
@@ -63,10 +71,6 @@
       <Syllables>ban,de,ra</Syllables>
     </Slide>
 
-    <Slide name="Avion">
-      <Syllables>a,vión</Syllables>
-    </Slide>
-
     <Slide name="Jirafa">
       <Syllables>ji,ra,fa</Syllables>
     </Slide>
@@ -85,10 +89,6 @@
 
     <Slide name="Gato">
       <Syllables>ga,to</Syllables>
-    </Slide>
-
-    <Slide name="Pajaro">
-      <Syllables>pá,ja,ro</Syllables>
     </Slide>
 
     <Slide name="Tortuga">
@@ -120,7 +120,7 @@
     </Slide>
 
     <Slide name="Piano">
-      <Syllables>pi,a,no</Syllables>
+      <Syllables>pia,no</Syllables>
     </Slide>
 
     <Slide name="Tambor">

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -103,11 +104,39 @@ public class GameManager : MonoBehaviour
 
     void CorrectSlideFeedback()
     {
-        foreach (ParticleSystem ps in particles)
-            ps.Emit(300);
+        StartCoroutine(EmitDelayed());
         resultTextParent.gameObject.SetActive(true);
         resultText.text = "Correcto !";
-        resultText.color = Color.green;
+        resultText.color = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
+    }
+
+    IEnumerator EmitDelayed()
+    {
+        List<int> indexesUsed = new List<int>();
+        for (int i = 0; i < particles.Count; i++)
+            indexesUsed.Add(i);
+
+        int randomIndex = 0;
+        for (int i = 0; i < particles.Count; i++)
+        {
+            randomIndex = Random.Range(0, indexesUsed.Count);
+
+            Vector3 screenPosition = Camera.main.ScreenToWorldPoint(
+                new Vector3(Random.Range(0, Screen.width),
+                            Random.Range(0, Screen.height),
+                            0));
+            particles[randomIndex].gameObject.transform.position = screenPosition;
+
+            ParticleSystem.ColorOverLifetimeModule colorOverLifetimeModule = particles[randomIndex].colorOverLifetime;
+            colorOverLifetimeModule.color = new ParticleSystem.MinMaxGradient(
+                Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f),
+                Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f)
+                );
+
+            particles[randomIndex].Play();
+            indexesUsed.Remove(randomIndex);
+            yield return new WaitForSeconds(Random.Range(0, .15f));
+        }
     }
 
     void IncorrectSlideFeedback()
