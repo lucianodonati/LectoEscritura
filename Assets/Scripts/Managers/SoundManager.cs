@@ -7,6 +7,8 @@ public class SoundManager : MonoBehaviour
     float masterVolume = .5f;
     public AudioClip[] musicClips;
     public List<AudioSource> audioSources;
+
+    [SerializeField]
     public Dictionary<string, AudioClip> alphabetClips;
 
     public List<StringClipPair> FXClips;
@@ -33,6 +35,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         alphabetClips = new Dictionary<string, AudioClip>(26);
+
         for (int audioSourcesIndex = 0; audioSourcesIndex < 3; audioSourcesIndex++)
             audioSources.Add(gameObject.AddComponent<AudioSource>());
 

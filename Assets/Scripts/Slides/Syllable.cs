@@ -127,19 +127,19 @@ public class Syllable : MonoBehaviour
         }
         else if (!accentedMarksCount)
         {
-            char[] withoutAccentMark = typedText.ToLower().ToCharArray();
-            for (int i = 0; i < withoutAccentMark.Length; i++)
+            char[] correctWithoutAccents = correctText.ToLower().ToCharArray();
+            for (int i = 0; i < correctWithoutAccents.Length; i++)
             {
                 for (int j = 0; j < accentedMarks.Length; j++)
                 {
-                    if (withoutAccentMark[i] == vocals[j])
+                    if (correctWithoutAccents[i] == accentedMarks[j])
                     {
-                        withoutAccentMark[i] = accentedMarks[j];
+                        correctWithoutAccents[i] = vocals[j];
                         break;
                     }
                 }
             }
-            if (correctText.ToLower() == new string(withoutAccentMark))
+            if (typedText.ToLower() == new string(correctWithoutAccents))
             {
                 correct = true;
                 return true;

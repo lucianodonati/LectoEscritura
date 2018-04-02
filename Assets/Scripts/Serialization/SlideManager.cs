@@ -14,6 +14,8 @@ public class SlideManager : MonoBehaviour
     public SoundManager soundManager;
     public Transform completedSlidesTransform;
 
+    int currentSlideIndex = 0;
+
     void Start()
     {
 
@@ -36,12 +38,10 @@ public class SlideManager : MonoBehaviour
     {
         if (sc.slides.Count > 0)
         {
-            int slideIndex = 0;
-
             if (randomOrder)
-                slideIndex = Random.Range(0, sc.slides.Count);
+                currentSlideIndex = Random.Range(0, sc.slides.Count);
 
-            SlideData data = sc.slides[slideIndex];
+            SlideData data = sc.slides[currentSlideIndex];
             Sprite theSprite = Resources.Load<Sprite>(imagesPath + data.slideName);
 
             Image theImage = prefabsManager.InstantiateImage(theSprite);
@@ -50,6 +50,10 @@ public class SlideManager : MonoBehaviour
             newSlide.Init(data.slideName, data.syllables, theImage, soundManager, completedSlidesTransform);
 
             //sc.slides.Remove(data);
+
+            currentSlideIndex++;
+            if (currentSlideIndex == sc.slides.Count)
+                currentSlideIndex = 0;
 
             return newSlide;
         }
