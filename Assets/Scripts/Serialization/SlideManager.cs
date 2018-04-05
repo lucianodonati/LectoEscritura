@@ -4,9 +4,12 @@ using System.Collections.Generic;
 
 public class SlideManager : MonoBehaviour
 {
+    [SerializeField]
+    Toggle randomOrderToggle = null, accentedMarksToggle = null;
+
     public const string imagesPath = "Images/";
 
-    public bool randomOrder = true;
+    private bool randomOrder;
 
     SlideContainer sc;
 
@@ -18,7 +21,19 @@ public class SlideManager : MonoBehaviour
 
     void Start()
     {
+        randomOrderToggle.isOn = randomOrder = PlayerPrefs.GetInt("RandomOrder", 1) == 1 ? true : false;
+        accentedMarksToggle.isOn = Syllable.accentedMarksCount = PlayerPrefs.GetInt("accentedMarksCount", 0) == 1 ? true : false;
+    }
 
+    public void ToggleRandomOrder(bool newRandomOrder)
+    {
+        PlayerPrefs.SetInt("RandomOrder", (randomOrder = newRandomOrder) ? 1 : 0);
+
+    }
+
+    public void ToggleAccentedMarksCheck(bool newAccentedMarksCheck)
+    {
+        PlayerPrefs.SetInt("accentedMarksCount", (Syllable.accentedMarksCount = newAccentedMarksCheck) ? 1 : 0);
     }
 
     public void ReadXML()

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
+
     public GameObject particleEffects;
 
     List<ParticleSystem> particles;
@@ -15,6 +17,10 @@ public class GameManager : MonoBehaviour
     public SlideManager slideManager;
     Slide currentSlide;
     public int currentSlideFinishedCount;
+
+    [SerializeField]
+    Text correctText = null, incorrectText = null;
+    public static int correct = 0, incorrect = 0;
 
     public enum GameState
     {
@@ -32,11 +38,29 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        instance = this;
+
         currentState = GameState.INIT;
         particles = new List<ParticleSystem>(particleEffects.GetComponentsInChildren<ParticleSystem>());
+
+        correctText.text = (correct = PlayerPrefs.GetInt("correct", 0)).ToString();
+        incorrectText.text = (incorrect = PlayerPrefs.GetInt("incorrect", 0)).ToString();
     }
 
-    // Update is called once per frame
+    public void AddCorrect()
+    {
+        correct++;
+        PlayerPrefs.SetInt("correct", correct);
+        correctText.text = correct.ToString();
+    }
+
+    public void AddIncorrect()
+    {
+        incorrect++;
+        PlayerPrefs.SetInt("incorrect", incorrect);
+        incorrectText.text = incorrect.ToString();
+    }
+
     void Update()
     {
         switch (currentState)

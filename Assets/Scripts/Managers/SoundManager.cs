@@ -1,18 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    public bool muted = true;
-    float masterVolume = .5f;
-    public AudioClip[] musicClips;
-    public List<AudioSource> audioSources;
+    public enum AudioSourcesTypes
+    {
+        Music, FX
+    }
 
     [SerializeField]
-    public Dictionary<string, AudioClip> alphabetClips;
+    AudioSource musicSource = null, FXSource = null;
+    [SerializeField]
+    Slider FXSlider = null, musicSlider = null;
+
+    float[] volumes = { .1f, .4f };
+
+    public AudioClip[] musicClips;
+
+    public AudioClip[] alphabetClips;
 
     public List<StringClipPair> FXClips;
-    //public Dictionary<string, AudioClip> FXClips;
 
     [System.Serializable]
     public struct StringClipPair
@@ -21,36 +29,14 @@ public class SoundManager : MonoBehaviour
         public AudioClip theClip;
     }
 
-
-    public enum AudioSourcesTypes
+    private void Start()
     {
-        MusicSource, FXSource, TypeWriterSource
-    }
-    float[] volumes = { .5f, .5f, .2f };
+        musicSlider.value = volumes[(int)AudioSourcesTypes.Music] = musicSource.volume =
+            PlayerPrefs.GetFloat(AudioSourcesTypes.Music.ToString(), volumes[(int)AudioSourcesTypes.Music]);
 
-    readonly string[] alphabet = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
-        "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+        FXSlider.value = volumes[(int)AudioSourcesTypes.FX] = FXSource.volume =
+            PlayerPrefs.GetFloat(AudioSourcesTypes.FX.ToString(), volumes[(int)AudioSourcesTypes.FX]);
 
-    // Use this for initialization
-    void Start()
-    {
-        alphabetClips = new Dictionary<string, AudioClip>(26);
-
-        for (int audioSourcesIndex = 0; audioSourcesIndex < 3; audioSourcesIndex++)
-            audioSources.Add(gameObject.AddComponent<AudioSource>());
-
-        Init();
-    }
-
-    void Init()
-    {
-        for (int alphabetKey = 0; alphabetKey < alphabet.Length; alphabetKey++)
-        {
-            string letter = alphabet[alphabetKey];
-            alphabetClips.Add(letter, Resources.Load<AudioClip>("Sounds/Typewriter/" + letter));
-        }
-
-        SetMuted();
         ToggleMusic();
     }
 
@@ -62,10 +48,9 @@ public class SoundManager : MonoBehaviour
         return null;
     }
 
-    public void ToggleMusic()
+    void ToggleMusic()
     {
-        AudioSource musicSource = audioSources[(int)AudioSourcesTypes.MusicSource];
-        if (musicSource.isPlaying)
+        if (!musicSource.isPlaying)
         {
             musicSource.clip = musicClips[Random.Range(0, musicClips.Length)];
             musicSource.Play();
@@ -75,39 +60,34 @@ public class SoundManager : MonoBehaviour
 
     }
 
-    public void SetMuted()
+    public void UpdateFXVolume(float _newVolume)
     {
-        foreach (AudioSource source in audioSources)
-            source.mute = muted;
-        UpdateMasterVolume(1);
+        FXSource.volume = _newVolume;
+        volumes[(int)AudioSourcesTypes.FX] = _newVolume;
+        PlayerPrefs.SetFloat(AudioSourcesTypes.FX.ToString(), _newVolume);
+        PlayerPrefs.Save();
+    }
+    public void UpdateMusicVolume(float _newVolume)
+    {
+        musicSource.volume = _newVolume;
+        volumes[(int)AudioSourcesTypes.Music] = _newVolume;
+        PlayerPrefs.SetFloat(AudioSourcesTypes.Music.ToString(), _newVolume);
+        PlayerPrefs.Save();
     }
 
-    public void UpdateMasterVolume(float _newVolume)
-    {
-        masterVolume = Mathf.Clamp(_newVolume, 0, 1);
-        UpdateVolume(AudioSourcesTypes.FXSource, volumes[(int)AudioSourcesTypes.FXSource]);
-        UpdateVolume(AudioSourcesTypes.MusicSource, volumes[(int)AudioSourcesTypes.MusicSource]);
-        UpdateVolume(AudioSourcesTypes.TypeWriterSource, volumes[(int)AudioSourcesTypes.TypeWriterSource]);
-    }
-
-    public void UpdateVolume(AudioSourcesTypes _whichOne, float _newVolume)
-    {
-        volumes[(int)_whichOne] = masterVolume * Mathf.Clamp(_newVolume, 0, 1);
-        audioSources[(int)_whichOne].volume = volumes[(int)_whichOne];
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        foreach (string key in alphabet)
-            if (Input.GetKeyDown(key))
-                audioSources[(int)AudioSourcesTypes.TypeWriterSource].PlayOneShot(alphabetClips[key]);
+        if (Input.anyKeyDown)
+        {
+            FXSource.PlayOneShot(
+                alphabetClips[Random.Range(0, alphabetClips.Length)], volumes[(int)AudioSourcesTypes.FX]);
+        }
     }
 
     public void playOneShot(string _clipName)
     {
         AudioClip theClip = getClipFromString(_clipName);
         if (theClip)
-            audioSources[(int)AudioSourcesTypes.FXSource].PlayOneShot(theClip, volumes[(int)AudioSourcesTypes.FXSource]);
+            FXSource.PlayOneShot(theClip, volumes[(int)AudioSourcesTypes.FX]);
     }
 }

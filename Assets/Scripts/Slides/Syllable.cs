@@ -9,7 +9,7 @@ public class Syllable : MonoBehaviour
         None, Init, Typing, Wrong, Shake, Correct, Transition, Done
     }
 
-    readonly bool accentedMarksCount = false;
+    public static bool accentedMarksCount = false;
     static readonly char[] vocals = { 'a', 'e', 'i', 'o', 'u' };
     static readonly char[] accentedMarks = { 'á', 'é', 'í', 'ó', 'ú' };
 
@@ -42,6 +42,7 @@ public class Syllable : MonoBehaviour
     void Start()
     {
         parentSlide = GetComponentInParent<Slide>();
+
     }
 
     void Update()
@@ -214,10 +215,12 @@ public class Syllable : MonoBehaviour
         {
             if (CheckIsCorrect())
             {
+                GameManager.instance.AddCorrect();
                 currentState = SyllableState.Correct;
             }
             else
             {
+                GameManager.instance.AddIncorrect();
                 currentState = SyllableState.Wrong;
             }
         }
