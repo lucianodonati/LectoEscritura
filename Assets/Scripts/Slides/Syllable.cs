@@ -27,6 +27,8 @@ public class Syllable : MonoBehaviour
     public bool completed, correct;
     string correctText, typedText;
 
+    bool shouldReFocus = false;
+
     bool initialized = false;
 
     bool shakeToggle = true;
@@ -59,6 +61,12 @@ public class Syllable : MonoBehaviour
                     text.image.color = Color.white;
                     text.text = "";
                     currentState = SyllableState.None;
+
+                    if(shouldReFocus)
+                    {
+                        parentSlide.ReFocusCurrent();
+                        shouldReFocus = false;
+                    }
                     break;
                 case SyllableState.Typing:
                     Typing();
@@ -162,7 +170,6 @@ public class Syllable : MonoBehaviour
             colorLerpTimer += Time.deltaTime / colorLerpDuration;
         else
             currentState = transitionTo;
-
     }
 
     void Correct()
@@ -171,15 +178,18 @@ public class Syllable : MonoBehaviour
         lerpTo = Color.green;
         transitionTo = SyllableState.Done;
         currentState = SyllableState.Transition;
+        parentSlide.SyllableCorrect();
         parentSlide.FocusNextSyllable();
     }
 
     void Wrong()
     {
         lerpTo = Color.red;
+        shouldReFocus = true;
         soundManager.playOneShot("Incorrect");
         transitionTo = SyllableState.Init;
         currentState = SyllableState.Shake;
+        parentSlide.ReFocusCurrent();
     }
 
     void Shaking()
@@ -200,7 +210,6 @@ public class Syllable : MonoBehaviour
         }
         else if (text.transform.eulerAngles.z - 360 < -5)
             shakeToggle = true;
-
     }
 
     public void SyllableValueChanged(string _currentValue)

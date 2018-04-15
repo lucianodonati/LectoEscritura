@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
@@ -14,7 +15,7 @@ public class Slide : MonoBehaviour
 
     public List<string> syllablesStrings;
     List<Syllable> syllables;
-    //Syllable currentSyllable;
+    int currentSyllable = 0;
 
     public readonly float slideSize = 0.6f;
 
@@ -72,8 +73,8 @@ public class Slide : MonoBehaviour
             // Focus on the first syllable to complete
             if (!syllablesFilled[syllableIndex] && firstOne)
             {
-                if (!Application.isMobilePlatform)
-                    FocusOnInputField(inputField);
+                currentSyllable = syllableIndex;
+                FocusOnInputField(inputField);
                 firstOne = false;
             }
         }
@@ -131,13 +132,19 @@ public class Slide : MonoBehaviour
         return false;
     }
 
+    public void SyllableCorrect()
+    {
+        syllablesFilled[currentSyllable] = true;
+    }
+
     Syllable getNextSyllableToComplete()
     {
         Syllable nextSyllable = null;
         for (int toCompleteIndex = syllablesFilledIndex; nextSyllable == null && toCompleteIndex < syllables.Count; toCompleteIndex++)
         {
-            if (syllablesFilled[toCompleteIndex])
+            if (!syllablesFilled[toCompleteIndex])
             {
+                currentSyllable = toCompleteIndex;
                 syllablesFilledIndex = toCompleteIndex;
                 nextSyllable = syllables[toCompleteIndex];
             }
@@ -164,10 +171,18 @@ public class Slide : MonoBehaviour
             FocusOnInputField(nextSyll.text);
     }
 
+    public void ReFocusCurrent()
+    {
+        FocusOnInputField(syllables[currentSyllable].text);
+    }
+
     void FocusOnInputField(InputField objectToFocusOn)
     {
-        EventSystem.current.SetSelectedGameObject(objectToFocusOn.gameObject, null);
-        objectToFocusOn.OnPointerClick(new PointerEventData(EventSystem.current));
+        objectToFocusOn.Select();
+        objectToFocusOn.ActivateInputField();
+
+        //EventSystem.current.SetSelectedGameObject(objectToFocusOn.gameObject, null);
+        //objectToFocusOn.OnPointerClick(new PointerEventData(EventSystem.current));
     }
 
     void Update()
