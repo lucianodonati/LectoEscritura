@@ -371,6 +371,234 @@
       <Syllables>a,zú,car</Syllables>
     </Slide>
 
+    <Slide name="Flores">
+      <Syllables>flo,res</Syllables>
+    </Slide>
+
+    <Slide name="Pluma">
+      <Syllables>plu,ma</Syllables>
+    </Slide>
+
+    <Slide name="Cuchillo">
+      <Syllables>cu,chi,llo</Syllables>
+    </Slide>
+
+    <Slide name="Tenedor">
+      <Syllables>te,ne,dor</Syllables>
+    </Slide>
+
+    <Slide name="Cuchara">
+      <Syllables>cu,cha,ra</Syllables>
+    </Slide>
+
+    <Slide name="Perfume">
+      <Syllables>per,fu,me</Syllables>
+    </Slide>
+
+    <Slide name="Reloj">
+      <Syllables>re,loj</Syllables>
+    </Slide>
+
+    <Slide name="Mesa">
+      <Syllables>me,sa</Syllables>
+    </Slide>
+
+    <Slide name="Silla">
+      <Syllables>si,lla</Syllables>
+    </Slide>
+
+    <Slide name="Mantel">
+      <Syllables>man,tel</Syllables>
+    </Slide>
+
+    <Slide name="Huevos">
+      <Syllables>hue,vos</Syllables>
+    </Slide>
+
+    <Slide name="Velas">
+      <Syllables>ve,las</Syllables>
+    </Slide>
+
+    <Slide name="Habitacion">
+      <Syllables>ha,bi,ta,ción</Syllables>
+    </Slide>
+
+    <Slide name="Rueda">
+      <Syllables>rue,da</Syllables>
+    </Slide>
+
+    <Slide name="Esmalte">
+      <Syllables>es,mal,te</Syllables>
+    </Slide>
+
+    <Slide name="Lapicera">
+      <Syllables>la,pi,ce,ra</Syllables>
+    </Slide>
+
+    <Slide name="Lapiz">
+      <Syllables>lá,piz</Syllables>
+    </Slide>
+
+    <Slide name="Agua">
+      <Syllables>a,gua</Syllables>
+    </Slide>
+
+    <Slide name="Peluche">
+      <Syllables>pe,lu,che</Syllables>
+    </Slide>
+
+    <Slide name="Ducha">
+      <Syllables>du,cha</Syllables>
+    </Slide>
+
+    <Slide name="Bolsas">
+      <Syllables>bol,sas</Syllables>
+    </Slide>
+
+    <Slide name="Sombrilla">
+      <Syllables>som,bri,lla</Syllables>
+    </Slide>
+
+    <Slide name="Zapatilla">
+      <Syllables>za,pa,ti,lla</Syllables>
+    </Slide>
+
+    <Slide name="Tacos">
+      <Syllables>ta,cos</Syllables>
+    </Slide>
+
+    <Slide name="Mochila">
+      <Syllables>mo,chi,la</Syllables>
+    </Slide>
+
+    <Slide name="Cargador">
+      <Syllables>car,ga,dor</Syllables>
+    </Slide>
+
+    <Slide name="Camara">
+      <Syllables>cá,ma,ra</Syllables>
+    </Slide>
+
+    <Slide name="Camisa">
+      <Syllables>ca,mi,sa</Syllables>
+    </Slide>
+
+    <Slide name="Vaso">
+      <Syllables>va,so</Syllables>
+    </Slide>
+
+    <Slide name="Plato">
+      <Syllables>pla,to</Syllables>
+    </Slide>
+
+    <Slide name="Anillo">
+      <Syllables>a,ni,llo</Syllables>
+    </Slide>
+
+    <Slide name="Celular">
+      <Syllables>ce,lu,lar</Syllables>
+    </Slide>
+
+    <Slide name="Columpio">
+      <Syllables>co,lum,pio</Syllables>
+    </Slide>
+
+    <Slide name="Tobogan">
+      <Syllables>to,bo,gán</Syllables>
+    </Slide>
+
+    <Slide name="Asado">
+      <Syllables>a,sa,do</Syllables>
+    </Slide>
+
+    <Slide name="Picada">
+      <Syllables>pi,ca,da</Syllables>
+    </Slide>
+
+    <Slide name="Arbol">
+      <Syllables>ár,bol</Syllables>
+    </Slide>
+
+    <Slide name="Elefante">
+      <Syllables>e,le,fan,te</Syllables>
+    </Slide>
+
+    <Slide name="Hormigas">
+      <Syllables>hor,mi,gas</Syllables>
+    </Slide>
+
+    <Slide name="Plancha">
+      <Syllables>plan,cha</Syllables>
+    </Slide>
+
+    <Slide name="Hilo">
+      <Syllables>hi,lo</Syllables>
+    </Slide>
+
+    <Slide name="Aguja">
+      <Syllables>a,gu,ja</Syllables>
+    </Slide>
+
+    <Slide name="Lana">
+      <Syllables>la,na</Syllables>
+    </Slide>
+
+    <Slide name="Gorra">
+      <Syllables>go,rra</Syllables>
+    </Slide>
+
+    <Slide name="Pastillas">
+      <Syllables>pas,ti,llas</Syllables>
+    </Slide>
+
+    <Slide name="Puerta">
+      <Syllables>puer,ta</Syllables>
+    </Slide>
+
+    <Slide name="Ventana">
+      <Syllables>ven,ta,na</Syllables>
+    </Slide>
+
+    <Slide name="Edificio">
+      <Syllables>e,di,fi,cio</Syllables>
+    </Slide>
+
+    <Slide name="Inodoro">
+      <Syllables>i,no,do,ro</Syllables>
+    </Slide>
+
+    <Slide name="Copa">
+      <Syllables>co,pa</Syllables>
+    </Slide>
+
+    <Slide name="Libro">
+      <Syllables>li,bro</Syllables>
+    </Slide>
+
+    <Slide name="Carpeta">
+      <Syllables>car,pe,ta</Syllables>
+    </Slide>
+
+    <Slide name="Guardapolvo">
+      <Syllables>guar,da,pol,vo</Syllables>
+    </Slide>
+
+    <Slide name="Policia">
+      <Syllables>po,li,cí,a</Syllables>
+    </Slide>
+
+    <Slide name="Bombero">
+      <Syllables>bom,be,ro</Syllables>
+    </Slide>
+
+    <Slide name="Calle">
+      <Syllables>ca,lle</Syllables>
+    </Slide>
+
+    <Slide name="Telefono">
+      <Syllables>te,lé,fo,no</Syllables>
+    </Slide>
+
 
   </Slides>
 </SlideCollection>
